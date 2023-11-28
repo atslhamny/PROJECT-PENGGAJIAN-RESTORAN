@@ -4,8 +4,8 @@ public class ProjectPenggajian {
 
     public static void main(String[] args) {
         // Array untuk menyimpan username, password, dan role (admin atau user)
-        String[] usernames = {"admin", "user1", "user2"};
-        String[] passwords = {"adminpass", "user1pass", "user2pass"};
+        String[] usernames = {"admin", "user1", "user2", "user3"};
+        String[] passwords = {"adminpass", "user1pass", "user2pass", "userpass3"};
         String[] roles = {"admin", "user"};
 
         // Membuat objek Scanner untuk input dari pengguna
