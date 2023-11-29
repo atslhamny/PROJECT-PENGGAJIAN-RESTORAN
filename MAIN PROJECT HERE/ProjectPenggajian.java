@@ -19,33 +19,12 @@ public class ProjectPenggajian {
         while (isRunning) {
             System.out.println("\nMenu Utama:");
 
-            if (role.equals("admin")) {
-                System.out.println("1. Menu Admin - Pilihan 1");
-                System.out.println("2. Menu Admin - Pilihan 2");
-            } else {
-                System.out.println("1. Menu User - Pilihan 1");
-                System.out.println("2. Menu User - Pilihan 2");
-            }
-
-            System.out.println("3. Keluar");
-
-            System.out.print("Pilih menu (1-3): ");
-            int choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    System.out.println("Anda memilih Pilihan 1");
-                    break;
-                case 2:
-                    System.out.println("Anda memilih Pilihan 2");
-                    break;
-                case 3:
-                    System.out.println("Keluar dari program. Sampai jumpa!");
-                    isRunning = false;
-                    break;
-                default:
-                    System.out.println("Pilihan tidak valid. Silakan pilih 1-3.");
-            }
+            if (role.equalsIgnoreCase("admin")) {
+                adminMenu(scanner);
+            } else if (role.equalsIgnoreCase("user")) {
+                userMenu(scanner);
+            }else
+            break;
         }
 
         // Menutup Scanner setelah pengguna keluar dari program
@@ -80,5 +59,75 @@ public class ProjectPenggajian {
         }
 
         return role;
+    }
+
+    // Fungsi untuk menampilkan menu admin
+    private static void adminMenu(Scanner scanner) {
+        boolean isUserMenuRunning = true;
+
+        while (isUserMenuRunning) {
+            System.out.println("Menu User:");
+            System.out.println("1. Menu User - Pilihan 1");
+            System.out.println("2. Menu User - Pilihan 2");
+            System.out.println("3. Absensi");
+            System.out.println("4. Kembali ke Menu Utama");
+
+            System.out.print("Pilih menu (1-4): ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Anda memilih Pilihan 1");
+                    break;
+                case 2:
+                    System.out.println("Anda memilih Pilihan 2");
+                    break;
+                case 3:
+                    // Add your attendance feature logic here
+                    System.out.println("Anda memilih Absensi");
+                    break;
+                case 4:
+                    System.out.println("Kembali ke Menu Utama");
+                    isUserMenuRunning = false;
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid. Silakan pilih 1-4.");
+            }
+        }
+    }
+
+    // Fungsi untuk menampilkan menu user
+    private static void userMenu(Scanner scanner) {
+        boolean isUserMenuRunning = true;
+
+        while (isUserMenuRunning) {
+            System.out.println("Menu User:");
+            System.out.println("1. Menu User - Pilihan 1");
+            System.out.println("2. Menu User - Pilihan 2");
+            System.out.println("3. Absensi");
+            System.out.println("4. Kembali ke Menu Utama");
+
+            System.out.print("Pilih menu (1-4): ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Anda memilih Pilihan 1");
+                    break;
+                case 2:
+                    System.out.println("Anda memilih Pilihan 2");
+                    break;
+                case 3:
+                    // Add your attendance feature logic here
+                    System.out.println("Anda memilih Absensi");
+                    break;
+                case 4:
+                    System.out.println("Kembali ke Menu Utama");
+                    isUserMenuRunning = false;
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid. Silakan pilih 1-4.");
+            }
+        }
     }
 }
