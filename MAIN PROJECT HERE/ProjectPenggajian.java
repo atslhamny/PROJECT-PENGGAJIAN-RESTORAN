@@ -1,15 +1,32 @@
 import java.util.Scanner;
 
 public class ProjectPenggajian {
+    static Scanner scanner = new Scanner(System.in);
+
+    static String skip;
+    static int jumlahKaryawan = 10;
+    static String dataKaryawan[][] = new String[jumlahKaryawan][10];
+    static boolean[][] absensiKaryawan = new boolean[jumlahKaryawan][31];
 
     public static void main(String[] args) {
         // Array untuk menyimpan username, password, dan role (admin atau user)
-        String[] usernames = {"admin", "user1", "user2", "user3"};
-        String[] passwords = {"adminpass", "user1pass", "user2pass", "userpass3"};
-        String[] roles = {"admin", "user"};
+        String[] usernames = {
+            "admin",
+            "user1",
+            "user2",
+            "user3"
+        };
+        String[] passwords = {
+            "adminpass",
+            "user1pass",
+            "user2pass",
+            "userpass3"
+        };
+        String[] roles = {
+            "admin",
+            "user"
+        };
 
-        // Membuat objek Scanner untuk input dari pengguna
-        Scanner scanner = new Scanner(System.in);
 
         // Memanggil metode login untuk mendapatkan informasi role (admin atau user)
         String role = login(usernames, passwords, roles, scanner);
@@ -23,8 +40,8 @@ public class ProjectPenggajian {
                 adminMenu(scanner);
             } else if (role.equalsIgnoreCase("user")) {
                 userMenu(scanner);
-            }else
-            break;
+            } else
+                break;
         }
 
         // Menutup Scanner setelah pengguna keluar dari program
@@ -32,7 +49,7 @@ public class ProjectPenggajian {
     }
 
     // Metode untuk login dengan array username, password, dan role
-    private static String login(String[] usernames, String[] passwords, String[] roles, Scanner scanner) {
+    public static String login(String[] usernames, String[] passwords, String[] roles, Scanner scanner) {
         boolean isLoggedIn = false;
         String role = "";
 
@@ -62,50 +79,113 @@ public class ProjectPenggajian {
     }
 
     // Fungsi untuk menampilkan menu admin
-    private static void adminMenu(Scanner scanner) {
-        boolean isUserMenuRunning = true;
+    public static void adminMenu(Scanner scanner) {
+        boolean isAdminMenu = true;
 
-        while (isUserMenuRunning) {
-            System.out.println("Menu User:");
-            System.out.println("1. Menu User - Pilihan 1");
-            System.out.println("2. Menu User - Pilihan 2");
-            System.out.println("3. Absensi");
-            System.out.println("4. Kembali ke Menu Utama");
+        while (isAdminMenu) {
+            System.out.println("Menu Admin:");
+            System.out.println("1. Input Data Karyawan");
+            System.out.println("2. Input Absensi");
+            System.out.println("3. Input Izin/Cuti");
+            System.out.println("4. Total Penggajian");
+            System.out.println("5. Rekapan Penggajian");
 
-            System.out.print("Pilih menu (1-4): ");
-            int choice = scanner.nextInt();
+            System.out.print("Pilih MENU: ");
+            int pilihan = scanner.nextInt();
+            scanner.nextLine();
 
-            switch (choice) {
+            switch (pilihan) {
                 case 1:
-                    System.out.println("Anda memilih Pilihan 1");
+                    System.out.println("========Input Data Karyawan=======");
+                    for (int i = 0; i < jumlahKaryawan; i++) { //Perulangan untuk menginput dataKaryawan
+                        System.out.println("\nData Karyawan ke-" + (i + 1));
+                        System.out.print("Nama: ");
+                        dataKaryawan[i][0] = scanner.nextLine();
+                        System.out.print("Posisi: ");
+                        dataKaryawan[i][1] = scanner.nextLine();
+                        System.out.print("Nomor Rekening: ");
+                        dataKaryawan[i][2] = scanner.nextLine(); //Menggunakan nextLine untuk membaca seluruh baris
+
+                        System.out.println("Apakah Anda ingin Melihat Data Karyawan yang telah di Inputkan? Ya/Tidak");
+                        skip = scanner.nextLine(); //Membersihkan newLine
+
+                        if (skip.equalsIgnoreCase("Ya")) {
+                            System.out.println("------------------------------------------------------");
+                            System.out.println("---------------------Data Karyawan--------------------");
+                            System.out.println("------------------------------------------------------");
+                            System.out.println("No\tNama\t\tPosisi\tNomor Rekening");
+                            for (int j = 0; j < jumlahKaryawan; j++) {
+                                if (dataKaryawan[j][0] != null) {
+                                    System.out.println((j + 1) + "\t" + dataKaryawan[j][0] + "\t\t" + dataKaryawan[j][1] + "\t\t" + dataKaryawan[j][2]);
+                                } else {
+                                    break;
+                                }
+                            }
+                        }
+
+                        System.out.println("Apakah Anda ingin memasukkan Data Karyawan lagi? Ya/Tidak");
+                        skip = scanner.nextLine();
+                        if (!skip.equalsIgnoreCase("Ya")) {
+                            break;
+                        }
+                    }
                     break;
                 case 2:
-                    System.out.println("Anda memilih Pilihan 2");
+                    System.out.println("========Input Absensi=======");
+                    System.out.print("Masukkan Nama Karyawan: ");
+                    String namaAbsen = scanner.nextLine();
+                    boolean karyawanDitemukan = false;
+
+                    for (int i = 0; i < jumlahKaryawan; i++) {
+                        if (namaAbsen.equalsIgnoreCase(dataKaryawan[i][0])) {
+                            karyawanDitemukan = true;
+                            System.out.println("\nAbsensi Karyawan ke-" + (i + 1));
+                            System.out.print("Apakah " + dataKaryawan[i][0] + " hadir? Y/T: ");
+                            String absensi = scanner.nextLine();
+
+                            if (absensi.equalsIgnoreCase("Y")) {
+                                absensiKaryawan[i][30] = true; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                System.out.println("Absensi berhasil diinputkan untuk Karyawan ke-" + (i + 1));
+                            } else if (absensi.equalsIgnoreCase("T")) {
+                                absensiKaryawan[i][30] = false; // Menggunakan indeks 30 untuk merepresentasikan absen
+                                                                // pada bulan ini
+                                System.out.println("Absensi berhasil diinputkan untuk Karyawan ke-" + (i + 1));
+                            } else {
+                                System.out.println("Invalid input. Harap masukkan Y atau T.");
+                                i--; // Ulangi loop untuk karyawan yang sama
+                            }
+                        }
+                    }
+
+                    if (!karyawanDitemukan) {
+                        System.out.println("Karyawan dengan nama " + namaAbsen + " tidak ditemukan.");
+                    }
                     break;
                 case 3:
                     // Add your attendance feature logic here
-                    System.out.println("Anda memilih Absensi");
+                    System.out.println("========Input Izin/Cuti=======");
                     break;
                 case 4:
                     System.out.println("Kembali ke Menu Utama");
-                    isUserMenuRunning = false;
+                    isAdminMenu = false;
                     break;
                 default:
-                    System.out.println("Pilihan tidak valid. Silakan pilih 1-4.");
+                    System.out.println("Pilihan tidak valid.");
             }
         }
     }
 
     // Fungsi untuk menampilkan menu user
-    private static void userMenu(Scanner scanner) {
+    public static void userMenu(Scanner scanner) {
         boolean isUserMenuRunning = true;
 
         while (isUserMenuRunning) {
             System.out.println("Menu User:");
-            System.out.println("1. Menu User - Pilihan 1");
-            System.out.println("2. Menu User - Pilihan 2");
-            System.out.println("3. Absensi");
-            System.out.println("4. Kembali ke Menu Utama");
+            System.out.println("1. Absensi");
+            System.out.println("2. Izin/Cuti");
+            System.out.println("3. Slip Gaji");
+            System.out.println("4. Informasi Perusahaan");
 
             System.out.print("Pilih menu (1-4): ");
             int choice = scanner.nextInt();
@@ -118,7 +198,6 @@ public class ProjectPenggajian {
                     System.out.println("Anda memilih Pilihan 2");
                     break;
                 case 3:
-                    // Add your attendance feature logic here
                     System.out.println("Anda memilih Absensi");
                     break;
                 case 4:
