@@ -225,7 +225,7 @@ public class ProjectPenggajian {
                     break;
                 
                 case 5:
-                    System.out.println("===== Rekapan Laporan Penggajian =====");
+                    System.out.println("===== Rekapan Laporan =====");
                     System.out.println("------------------------------------------------");
                     System.out.println("No\tNama\t\tPosisi\t\tTotal Gaji");
                     System.out.println("------------------------------------------------");
