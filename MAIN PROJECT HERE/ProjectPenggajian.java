@@ -174,7 +174,7 @@ public class ProjectPenggajian {
                             System.out.print("Masukkan jumlah hari Izin/Cuti: ");
                             int jumlahHariIzinCuti = scanner.nextInt();
                             scanner.nextLine();
-                            int potonganGaji = jumlahHariIzinCuti * 5000;
+                            int potonganGaji = jumlahHariIzinCuti * 1000;
             
                             if(jumlahHariIzinCuti <= 0){
                                 System.out.println("Jumlah Hari Izin/Cuti harus lebih dari 0");
