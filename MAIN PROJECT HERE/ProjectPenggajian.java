@@ -163,7 +163,7 @@ public class ProjectPenggajian {
                     }
                     break;
                 case 3:
-                    // Add your attendance feature logic here
+                    System.out.print("========Input Izin/Cuti=======");
                     System.out.print("Masukkan Nama Karyawan yang Akan Mengajukan Izin/Cuti: ");
                     String namaIzinCuti = scanner.nextLine();
                     boolean izinCutiDitemukan = false;
@@ -174,7 +174,7 @@ public class ProjectPenggajian {
                             System.out.print("Masukkan jumlah hari Izin/Cuti: ");
                             int jumlahHariIzinCuti = scanner.nextInt();
                             scanner.nextLine();
-                            int potonganGaji = jumlahHariIzinCuti * 5000;
+                            int potonganGaji = jumlahHariIzinCuti * 10000;
             
                             if(jumlahHariIzinCuti <= 0){
                                 System.out.println("Jumlah Hari Izin/Cuti harus lebih dari 0");
@@ -182,6 +182,7 @@ public class ProjectPenggajian {
                             dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
                             System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
                             System.out.println("Potongan gaji sebesar " + potonganGaji + " telah diberlakukan");
+                            System.out.println("Silahkan Melihat Informasi Perusahaan");
                         }
                         break;
                     }
