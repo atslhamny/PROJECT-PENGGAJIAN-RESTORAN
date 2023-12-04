@@ -193,7 +193,7 @@ public class ProjectPenggajian {
                 case 4:
                 System.out.println("Masukkan Nama Karyawan yang Akan di Inputkan: ");
                 String namaKaryawan = scanner.nextLine();
-                Boolean kywnDitemukan = false;
+                karyawanDitemukan = false;
                 double bonus = 0.0;
         
                 for(int i = 0; i < jumlahKaryawan; i++){
@@ -230,7 +230,7 @@ public class ProjectPenggajian {
                     }
                 }
             
-                if(!kywnDitemukan){
+                if(!karyawanDitemukan){
                 System.out.println("Karyawan dengan Nama " + namaKaryawan + " tidak ditemukan"); 
                 }  
                 break;
