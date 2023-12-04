@@ -174,7 +174,7 @@ public class ProjectPenggajian {
                             System.out.print("Masukkan jumlah hari Izin/Cuti: ");
                             int jumlahHariIzinCuti = scanner.nextInt();
                             scanner.nextLine();
-                            int potonganGaji = jumlahHariIzinCuti * 10000;
+                            int potonganGaji = jumlahHariIzinCuti * 5000;
             
                             if(jumlahHariIzinCuti <= 0){
                                 System.out.println("Jumlah Hari Izin/Cuti harus lebih dari 0");
@@ -182,7 +182,6 @@ public class ProjectPenggajian {
                             dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
                             System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
                             System.out.println("Potongan gaji sebesar " + potonganGaji + " telah diberlakukan");
-                            System.out.println("Silahkan Melihat Informasi Perusahaan");
                         }
                         break;
                     }
