@@ -89,6 +89,7 @@ public class ProjectPenggajian {
             System.out.println("3. Input Izin/Cuti");
             System.out.println("4. Total Penggajian");
             System.out.println("5. Rekapan Penggajian");
+            System.out.println("6. Keluar");
 
             System.out.print("Pilih MENU: ");
             int pilihan = scanner.nextInt();
@@ -222,7 +223,52 @@ public class ProjectPenggajian {
                             System.out.println("Karyawan dengan nama " + namaKaryawan + " tidak ditemukan.");
                         }
                     break;
+                
                 case 5:
+                    System.out.println("===== Rekapan Laporan Penggajian =====");
+                    System.out.println("------------------------------------------------");
+                    System.out.println("No\tNama\t\tPosisi\t\tTotal Gaji");
+                    System.out.println("------------------------------------------------");
+                    for (int i = 0; i < jumlahKaryawan; i++) {
+                        if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null) {
+                            String nama = dataKaryawan[i][0];
+                            String posisi = dataKaryawan[i][1];
+                            // String absensi = dataKaryawan[i][6];
+                            double totalGaji = 0;
+                            if (dataKaryawan[i][2] != null) {
+                                String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
+                                int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                                int potonganGaji = jumlahHariIzinCuti * 5000;
+                                totalGaji -= potonganGaji;
+                            }
+                            // Hitung total gaji dengan bonus dan potongan izin/cuti
+                            if (dataKaryawan[i][3] != null && dataKaryawan[i][4] != null) {
+                                int jamKerja = Integer.parseInt(dataKaryawan[i][3]);
+                                int jumlahPorsi = Integer.parseInt(dataKaryawan[i][4]);
+
+                                int gajiPokok = 5000 * jamKerja;
+                                double bonus = 0;
+                                // Hitung bonus jika jam kerja lebih dari 8 jam
+                                if (jamKerja > 8) {
+                                    bonus = 0.05 * gajiPokok; // Bonus 5% jika jam kerja lebih dari 8 jam
+                                }
+                                // Hitung bonus penjualan makanan
+                                if (jumlahPorsi > 30) {
+                                    bonus += 0.10 * gajiPokok; // Bonus 10% jika menjual lebih dari 30 porsi
+                                } else if (jumlahPorsi > 20) {
+                                    bonus += 0.07 * gajiPokok; // Bonus 7% jika menjual lebih dari 20 porsi
+                                } else if (jumlahPorsi > 15) {
+                                    bonus += 0.05 * gajiPokok; // Bonus 5% jika menjual lebih dari 15 porsi
+                                }
+                                totalGaji = gajiPokok + bonus;
+                            }
+                            System.out.println((i + 1) + "\t" + nama + "\t\t" + posisi + "\t\t" + totalGaji);
+                        }
+                    }
+                    System.out.println("------------------------------------------------");
+                break;
+                
+                case 7:
                     System.out.println("Kembali ke Menu Utama");
                     isAdminMenu = false;
                     break;
@@ -254,7 +300,13 @@ public class ProjectPenggajian {
                     System.out.println("Anda memilih Pilihan 2");
                     break;
                 case 3:
-                    System.out.println("Anda memilih Absensi");
+                    System.out.println("======== Informasi Perusahaan =======");
+                    System.out.print("Masukkan Event Yang Akan Berlangsung: ");
+                    String event = scanner.nextLine();
+                    System.out.print("Masukkan Tanggal Event Berlangsung: ");
+                    String Tanggal = scanner.nextLine();
+
+                    System.out.println(event + "Berlangsung Pada" + Tanggal);
                     break;
                 case 4:
                     System.out.println("Kembali ke Menu Utama");
