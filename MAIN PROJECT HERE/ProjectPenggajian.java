@@ -177,7 +177,7 @@ public class ProjectPenggajian {
                             int potonganGaji = jumlahHariIzinCuti * 5000;
             
                             if(jumlahHariIzinCuti <= 0){
-                                System.out.println("Jumlah Hari Iin/Cuti harus lebih dari 0");
+                                System.out.println("Jumlah Hari Izin/Cuti harus lebih dari 0");
                             }else{
                             dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
                             System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
@@ -189,7 +189,52 @@ public class ProjectPenggajian {
                 if(!izinCutiDitemukan){
                     System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak Ditemukan");
                 }
+                break;
                 case 4:
+                System.out.println("Masukkan Nama Karyawan yang Akan di Inputkan: ");
+                String namaKaryawan = scanner.nextLine();
+                Boolean kywnDitemukan = false;
+                double bonus = 0.0;
+        
+                for(int i = 0; i < jumlahKaryawan; i++){
+                    if(namaKaryawan.equalsIgnoreCase(dataKaryawan[i][0])){
+                        karyawanDitemukan = true;
+                
+                        System.out.println("Masukkan Jumlah Jam Kerja: ");
+                        int jamKerja = scanner.nextInt();
+                        int gajiPokok = jamKerja * 5000;
+        
+                        double totalGaji = gajiPokok;
+        
+                        if(dataKaryawan[i][2] != null){
+                            String[] izinCutiInfo = dataKaryawan[i][2].split(" ");
+                            int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                            int potonganGaji = jumlahHariIzinCuti * 5000;
+                            totalGaji -= potonganGaji;
+                            System.out.println("Potongan Gaji Karena Izin.Cuti: " + potonganGaji);
+                        }
+                
+                        System.out.println("Masukkan Jumlah Porsi Makanan yang Terjual: ");
+                        int jumlahPorsi = scanner.nextInt();
+                        if(jumlahPorsi > 30){
+                            bonus += 0.10 * gajiPokok;
+                        }else if (jumlahPorsi > 20){
+                            bonus += 0.05 * gajiPokok;
+                        }else if (jumlahPorsi > 15){
+                            bonus += 0.05 * gajiPokok;
+                        }
+
+                        totalGaji += bonus;//Tambahkan bonus ke totalGaji
+                        System.out.println("Total Gaji sebelum potongan: " + totalGaji);
+                        System.out.println("Total gaji setelah potongan dan bonus: " + totalGaji);
+                    }
+                }
+            
+                if(!kywnDitemukan){
+                System.out.println("Karyawan dengan Nama " + namaKaryawan + " tidak ditemukan"); 
+                }  
+                break;
+                case 5:
                     System.out.println("Kembali ke Menu Utama");
                     isAdminMenu = false;
                     break;
