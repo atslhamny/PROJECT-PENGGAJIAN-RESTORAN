@@ -166,7 +166,63 @@ public class ProjectPenggajian {
                     // Add your attendance feature logic here
                     System.out.println("========Input Izin/Cuti=======");
                     break;
+
                 case 4:
+                    System.out.print("========Input Izin/Cuti=======");
+                    System.out.print("Masukkan Nama Karyawan yang Akan Menginput Jam Kerja: ");
+                        String namaKaryawan = input.next();
+                        karyawanDitemukan = false;
+                        for (int i = 0; i < jumlahKaryawan; i++) {
+                            if (namaKaryawan.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                karyawanDitemukan = true;
+                                System.out.print("Masukkan jumlah jam kerja: ");
+                                int jamKerja = input.nextInt();
+                                int gajiPokok = 5000 * jamKerja;
+                                double bonus = 0;
+
+                                // Hitung bonus jika jam kerja lebih dari 8 jam
+                                if (jamKerja > 8) {
+                                    bonus = 0.05 * gajiPokok; // Bonus 5% jika jam kerja lebih dari 8 jam
+                                }
+
+                                // Hitung bonus penjualan makanan
+                                System.out.print("Masukkan jumlah porsi makanan yang terjual: ");
+                                int jumlahPorsi = input.nextInt();
+                                if (jumlahPorsi > 30) {
+                                    bonus += 0.10 * gajiPokok; // Bonus 10% jika menjual lebih dari 30 porsi
+                                } else if (jumlahPorsi > 20) {
+                                    bonus += 0.07 * gajiPokok; // Bonus 7% jika menjual lebih dari 20 porsi
+                                } else if (jumlahPorsi > 15) {
+                                    bonus += 0.05 * gajiPokok; // Bonus 5% jika menjual lebih dari 15 porsi
+                                }
+
+                                double totalGaji = gajiPokok + bonus;
+                                // Potong gaji berdasarkan izin/cuti
+                                if (dataKaryawan[i][2] != null) {
+                                    String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
+                                    int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                                    int potonganGaji = jumlahHariIzinCuti * 5000;
+                                    totalGaji -= potonganGaji;
+                                    System.out.println("Potongan gaji akibat izin/cuti: " + potonganGaji);
+                                }
+
+                                // Hitung total gaji
+                                dataKaryawan[i][3] = Integer.toString(jamKerja); // Save jam kerja to array
+                                dataKaryawan[i][4] = Integer.toString(jumlahPorsi); // Save jumlah porsi to array
+                                dataKaryawan[i][5] = Double.toString(totalGaji); // Save total gaji to array
+                                System.out.println("Total gaji sebelum potongan: " + totalGaji);
+
+                                // Tampilkan total gaji akhir
+                                System.out.println("Total gaji setelah potongan: " + totalGaji);
+                                break;
+                            }
+                        }
+
+                        if (!karyawanDitemukan) {
+                            System.out.println("Karyawan dengan nama " + namaKaryawan + " tidak ditemukan.");
+                        }
+                    break;
+                case 5:
                     System.out.println("Kembali ke Menu Utama");
                     isAdminMenu = false;
                     break;
