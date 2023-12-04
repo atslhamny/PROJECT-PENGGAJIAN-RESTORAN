@@ -168,7 +168,7 @@ public class ProjectPenggajian {
                     break;
 
                 case 4:
-                    System.out.print("========Input Izin/Cuti=======");
+                    System.out.print("========Total Penggajian=======");
                     System.out.print("Masukkan Nama Karyawan yang Akan Menginput Jam Kerja: ");
                         String namaKaryawan = input.next();
                         karyawanDitemukan = false;
