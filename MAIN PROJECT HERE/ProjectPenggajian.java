@@ -269,12 +269,89 @@ public class ProjectPenggajian {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Anda memilih Pilihan 1");
+                    System.out.println("================Input Data===============");
+                    for (int i = 0; i < jumlahKaryawan; i++) {
+                        System.out.println("\nData Karyawan ke-" + (i + 1));
+                        System.out.print("Masukkan Nama: ");
+                        scanner.nextLine();
+                        dataKaryawan[i][0] = scanner.nextLine();
+                        System.out.print("Masukkan Posisi: ");
+                        dataKaryawan[i][1] = scanner.nextLine();
+                    
+                    System.out.println("Apakah anda ingin menambahkan data karyawan lagi? Ya/Tidak");
+                    skip = scanner.nextLine();
+                    if (!skip.equalsIgnoreCase("Ya")) {
+                        break;
+                    }
+                }
                     break;
                 case 2:
-                    System.out.println("Anda memilih Izin/Cuti");
+                    System.out.println("=============ABSENSI============");
+                    System.out.println("1. Absensi Masuk");
+                    System.out.println("2. Absensi Pulang");
+
+                    System.out.print("Pilih: ");
+                    int pilih = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (pilih) {
+                        case 1:
+                            System.out.println("========ABSENSI MASUK======");
+                            System.out.print("Masukkan Nama: ");
+                            String namaAbsen = scanner.nextLine();
+                            boolean karyawanDitemukan = false;
+                            int j = 0;
+
+                            for (int i = 0; i < jumlahKaryawan; i++) {
+                                if (namaAbsen.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                    karyawanDitemukan = true;
+                                    System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
+                                    String absensi = scanner.nextLine();
+                                
+                                } if (namaAbsen.equalsIgnoreCase("Ya")) {
+                                    absensiKaryawan[j][30] = true; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                    System.out.println("Absensi masuk berhasil dicatat." + (i + 1));
+                                } else if (namaAbsen.equalsIgnoreCase("Tidak")) {
+                                    absensiKaryawan[j][30] = false; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                }
+                            }
+
+                            if (!karyawanDitemukan) {
+                                System.out.println("Karyawan dengan nama " + namaAbsen + " tidak ditemukan.");
+                            }
+                        break;
+                        case 2:
+                            System.out.println("========ABSENSI PULANG======");
+                            System.out.print("Masukkan Nama: ");
+                            String namaabsen = scanner.nextLine();
+                            boolean karyawanditemukan = false;
+                            int J = 0;
+
+                            for (int i = 0; i < jumlahKaryawan; i++) {
+                                if (namaabsen.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                    karyawanDitemukan = true;
+                                    System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
+                                    String absensi = scanner.nextLine();
+                                
+                                } if (namaabsen.equalsIgnoreCase("Ya")) {
+                                    absensiKaryawan[J][30] = true; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                    System.out.println("Absensi pulang berhasil dicatat." + (i + 1));
+                                } else if (namaabsen.equalsIgnoreCase("Tidak")) {
+                                    absensiKaryawan[J][30] = false; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                }
+                            }
+                            
+                            if (!karyawanditemukan) {
+                                System.out.println("Karyawan dengan nama " + namaabsen + " tidak ditemukan.");
+                            }
+                    }
+                    break;
                 case 3:
-                    System.out.println("Anda memilih Absensi");
+                    System.out.println("Anda memilih izin/cuti");
                     break;
                 case 4:
                     System.out.println("Kembali ke Menu Utama");
