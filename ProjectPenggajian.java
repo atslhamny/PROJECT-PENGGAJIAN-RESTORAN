@@ -211,7 +211,7 @@ public class ProjectPenggajian {
                 }
                     break;
                 case 2:
-                    System.out.println("=============ABSENSI===========");
+                    System.out.println("=============ABSENSI============");
                     System.out.println("1. Absensi Masuk");
                     System.out.println("2. Absensi Pulang");
 
