@@ -190,6 +190,61 @@ public class ProjectPenggajian {
                     System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak Ditemukan");
                 }
                 case 4:
+                    System.out.println("===============Total Penggajian=============");
+                    System.out.print("Masukkan Nama Karyawan yang Akan di Inputkan: ");
+                    String namaKaryawan = scanner.nextLine();
+                    karyawanDitemukan = false;
+                    double bonus = 0.0;
+                    int gajiPokok = 5000;
+
+                        System.out.print("Masukkan Jumlah Jam Kerja: ");
+                        int jamKerja = scanner.nextInt();
+                        int totalGaji = jamKerja * 5000;
+
+                        System.out.println("Total Gaji: " + totalGaji);
+
+                        System.out.print("Masukkan Jumlah Porsi Makanan yang Terjual: ");
+                        int jumlahPorsi = scanner.nextInt();
+
+                        if(jumlahPorsi > 30){
+                            bonus += 0.10 * totalGaji;
+                        }else if (jumlahPorsi > 20){
+                            bonus += 0.05 * totalGaji;
+                        }else if (jumlahPorsi > 15){
+                            bonus += 0.05 * totalGaji;
+                        }
+                    
+                        System.out.println("Bonus: " + bonus);
+
+                    //if(namaKaryawan.equalsIgnoreCase(dataKaryawan[i][0])){
+                        //karyawanDitemukan = true;
+                    for(int i = 0; i < jumlahKaryawan; i++){
+                        if(dataKaryawan[i][0] != null && dataKaryawan[i][1] != null && dataKaryawan[i][2] != null){
+                        namaKaryawan = dataKaryawan[i][0];
+                        karyawanDitemukan = true;
+
+                        if(dataKaryawan[i][2] != null){
+                            String[] izinCutiInfo = dataKaryawan[i][2].split(" ");
+                            int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                            int potonganGaji = jumlahHariIzinCuti * 5000;
+                            totalGaji -= potonganGaji;
+                            System.out.println("Potongan Gaji Karena Izin Cuti: " + potonganGaji);
+                    
+                        
+                            System.out.println("Total Gaji setelah potongan: " + totalGaji);
+                            totalGaji +=bonus;
+                            System.out.println("Total Gaji setelah potongan dan penambahan bonus: " + totalGaji );
+                        
+                            break;
+                        }
+                    }
+            
+                        if(!karyawanDitemukan){
+                        System.out.println("Karyawan dengan Nama " + namaKaryawan + " tidak ditemukan"); 
+                        }
+                    break;
+                }
+                case 5:
                     System.out.println("Kembali ke Menu Utama");
                     isAdminMenu = false;
                     break;
