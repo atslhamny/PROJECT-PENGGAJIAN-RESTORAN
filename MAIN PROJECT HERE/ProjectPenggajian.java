@@ -259,10 +259,11 @@ public class ProjectPenggajian {
 
         while (isUserMenuRunning) {
             System.out.println("Menu User:");
-            System.out.println("1. Absensi");
-            System.out.println("2. Izin/Cuti");
-            System.out.println("3. Slip Gaji");
-            System.out.println("4. Informasi Perusahaan");
+            System.out.println("1. Input Data");
+            System.out.println("2. Absensi");
+            System.out.println("3. Izin/Cuti");
+            System.out.println("4. Slip Gaji");
+            System.out.println("5. Informasi Perusahaan");
 
             System.out.print("Pilih menu (1-4): ");
             int choice = scanner.nextInt();
@@ -351,8 +352,27 @@ public class ProjectPenggajian {
                     }
                     break;
                 case 3:
-                    System.out.println("Anda memilih izin/cuti");
-                    break;
+                    System.out.println("========Izin/Cuti========");
+                    System.out.print("Masukkan Nama Karyawan yang Akan Mengajukan Izin/Cuti: ");
+                    String namaIzinCuti = scanner.nextLine();
+                    scanner.nextLine();
+                    boolean izinCutiDitemukan = false;
+            
+                    for(int i = 0; i < jumlahKaryawan; i++){
+                        if(dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])){
+                            izinCutiDitemukan = true;
+                            System.out.print("Masukkan jumlah hari Izin/Cuti: ");
+                            int jumlahHariIzinCuti = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
+                            break;
+                        }
+                        if (!izinCutiDitemukan) {
+                            System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak ditemukan.");
+                        }
+                        break;
+                    }
+            
                 case 4:
                     System.out.println("Kembali ke Menu Utama");
                     isUserMenuRunning = false;
