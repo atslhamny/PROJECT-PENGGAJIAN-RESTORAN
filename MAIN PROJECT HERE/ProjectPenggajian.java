@@ -209,7 +209,7 @@ public class ProjectPenggajian {
                         if(jumlahPorsi > 30){
                             bonus += 0.10 * totalGaji;
                         }else if (jumlahPorsi > 20){
-                            bonus += 0.05 * totalGaji;
+                            bonus += 0.07 * totalGaji;
                         }else if (jumlahPorsi > 15){
                             bonus += 0.05 * totalGaji;
                         }
@@ -238,7 +238,6 @@ public class ProjectPenggajian {
                             break;
                         }
                     }
-            
                         if(!karyawanDitemukan){
                         System.out.println("Karyawan dengan Nama " + namaKaryawan + " tidak ditemukan"); 
                         }
