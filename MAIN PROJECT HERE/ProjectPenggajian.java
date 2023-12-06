@@ -299,7 +299,7 @@ public class ProjectPenggajian {
                 case 2:
                     System.out.println("Anda memilih Pilihan 2");
                     break;
-                case 3:
+                case 5:
                 System.out.println("Anda memilih Slip Gaji"); 
                 System.out.print("Masukkan Tanggal Permintaan Slip Gaji (format: DD/MM/YYYY): ");
                 String tanggal = scanner.next(); // Menggunakan next() untuk membaca input tanggal
@@ -364,7 +364,7 @@ public class ProjectPenggajian {
                 break;
    
                     
-                case 4:
+                case 6:
                     System.out.println("======== Informasi Perusahaan =======");
                     System.out.print("Masukkan Event Yang Akan Berlangsung: ");
                     String event = scanner.nextLine();
@@ -373,7 +373,7 @@ public class ProjectPenggajian {
 
                     System.out.println(event + "Berlangsung Pada" + Tanggal);
                     break;
-                case 5:
+                case 7:
                     System.out.println("Kembali ke Menu Utama");
                     isUserMenuRunning = false;
                     break;
