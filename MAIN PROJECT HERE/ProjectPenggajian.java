@@ -89,6 +89,7 @@ public class ProjectPenggajian {
             System.out.println("3. Input Izin/Cuti");
             System.out.println("4. Total Penggajian");
             System.out.println("5. Rekapan Penggajian");
+            System.out.println("6. Keluar");
 
             System.out.print("Pilih MENU: ");
             int pilihan = scanner.nextInt();
@@ -263,9 +264,16 @@ public class ProjectPenggajian {
                     System.out.println("Anda memilih Pilihan 1");
                     break;
                 case 2:
-                    System.out.println("Anda memilih Izin/Cuti");
+                    System.out.println("Anda memilih Pilihan 2");
+                    break;
                 case 3:
-                    System.out.println("Anda memilih Absensi");
+                    System.out.println("======== Informasi Perusahaan =======");
+                    System.out.print("Masukkan Event Yang Akan Berlangsung: ");
+                    String event = scanner.nextLine();
+                    System.out.print("Masukkan Tanggal Event Berlangsung: ");
+                    String Tanggal = scanner.nextLine();
+
+                    System.out.println(event + "Berlangsung Pada" + Tanggal);
                     break;
                 case 4:
                     System.out.println("Kembali ke Menu Utama");
