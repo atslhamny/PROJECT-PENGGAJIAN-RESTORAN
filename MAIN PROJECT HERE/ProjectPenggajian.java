@@ -299,7 +299,7 @@ public class ProjectPenggajian {
                 case 2:
                     System.out.println("Anda memilih Pilihan 2");
                     break;
-                case 3:
+                case 4:
                     System.out.println("======== Informasi Perusahaan =======");
                     System.out.print("Masukkan Event Yang Akan Berlangsung: ");
                     String event = scanner.nextLine();
@@ -308,7 +308,7 @@ public class ProjectPenggajian {
 
                     System.out.println(event + "Berlangsung Pada" + Tanggal);
                     break;
-                case 4:
+                case 5:
                     System.out.println("Kembali ke Menu Utama");
                     isUserMenuRunning = false;
                     break;
