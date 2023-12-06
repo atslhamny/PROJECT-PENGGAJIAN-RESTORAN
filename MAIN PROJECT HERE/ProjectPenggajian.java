@@ -382,8 +382,16 @@ public class ProjectPenggajian {
                         }
                         break;
                     }
-            
                 case 4:
+                    System.out.println("======== Informasi Perusahaan =======");
+                    System.out.print("Masukkan Event Yang Akan Berlangsung: ");
+                    String event = scanner.nextLine();
+                    System.out.print("Masukkan Tanggal Event Berlangsung: ");
+                    String Tanggal = scanner.nextLine();
+
+                    System.out.println(event + "Berlangsung Pada" + Tanggal);
+                    break;
+                case 5:
                     System.out.println("Kembali ke Menu Utama");
                     isUserMenuRunning = false;
                     break;
