@@ -192,21 +192,39 @@ public class ProjectPenggajian {
                 }
                 break;
                 case 4:
-                System.out.println("Masukkan Nama Karyawan yang Akan di Inputkan: ");
-                String namaKaryawan = scanner.nextLine();
-                karyawanDitemukan = false;
-                double bonus = 0.0;
-        
-                for(int i = 0; i < jumlahKaryawan; i++){
-                    if(namaKaryawan.equalsIgnoreCase(dataKaryawan[i][0])){
-                        karyawanDitemukan = true;
-                
-                        System.out.println("Masukkan Jumlah Jam Kerja: ");
+                    System.out.println("===============Total Penggajian=============");
+                    System.out.print("Masukkan Nama Karyawan yang Akan di Inputkan: ");
+                    String namaKaryawan = scanner.nextLine();
+                    karyawanDitemukan = false;
+                    double bonus = 0.0;
+                    int gajiPokok = 5000;
+
+                        System.out.print("Masukkan Jumlah Jam Kerja: ");
                         int jamKerja = scanner.nextInt();
-                        int gajiPokok = jamKerja * 5000;
-        
-                        double totalGaji = gajiPokok;
-        
+                        int totalGaji = jamKerja * 5000;
+
+                        System.out.println("Total Gaji: " + totalGaji);
+
+                        System.out.print("Masukkan Jumlah Porsi Makanan yang Terjual: ");
+                        int jumlahPorsi = scanner.nextInt();
+
+                        if(jumlahPorsi > 30){
+                            bonus += 0.10 * totalGaji;
+                        }else if (jumlahPorsi > 20){
+                            bonus += 0.07 * totalGaji;
+                        }else if (jumlahPorsi > 15){
+                            bonus += 0.05 * totalGaji;
+                        }
+                    
+                        System.out.println("Bonus: " + bonus);
+
+                    //if(namaKaryawan.equalsIgnoreCase(dataKaryawan[i][0])){
+                        //karyawanDitemukan = true;
+                    for(int i = 0; i < jumlahKaryawan; i++){
+                        if(dataKaryawan[i][0] != null && dataKaryawan[i][1] != null && dataKaryawan[i][2] != null){
+                        namaKaryawan = dataKaryawan[i][0];
+                        karyawanDitemukan = true;
+
                         if(dataKaryawan[i][2] != null){
                             String[] izinCutiInfo = dataKaryawan[i][2].split(" ");
                             int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
@@ -251,30 +269,120 @@ public class ProjectPenggajian {
 
         while (isUserMenuRunning) {
             System.out.println("Menu User:");
-            System.out.println("1. Absensi");
-            System.out.println("2. Izin/Cuti");
-            System.out.println("3. Slip Gaji");
-            System.out.println("4. Informasi Perusahaan");
+            System.out.println("1. Input Data");
+            System.out.println("2. Absensi");
+            System.out.println("3. Izin/Cuti");
+            System.out.println("4. Slip Gaji");
+            System.out.println("5. Informasi Perusahaan");
 
             System.out.print("Pilih menu (1-4): ");
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    System.out.println("Anda memilih Pilihan 1");
+                    System.out.println("================Input Data===============");
+                    for (int i = 0; i < jumlahKaryawan; i++) {
+                        System.out.println("\nData Karyawan ke-" + (i + 1));
+                        System.out.print("Masukkan Nama: ");
+                        scanner.nextLine();
+                        dataKaryawan[i][0] = scanner.nextLine();
+                        System.out.print("Masukkan Posisi: ");
+                        dataKaryawan[i][1] = scanner.nextLine();
+                    
+                    System.out.println("Apakah anda ingin menambahkan data karyawan lagi? Ya/Tidak");
+                    skip = scanner.nextLine();
+                    if (!skip.equalsIgnoreCase("Ya")) {
+                        break;
+                    }
+                }
                     break;
                 case 2:
-                    System.out.println("Anda memilih Pilihan 2");
+                    System.out.println("=============ABSENSI============");
+                    System.out.println("1. Absensi Masuk");
+                    System.out.println("2. Absensi Pulang");
+
+                    System.out.print("Pilih: ");
+                    int pilih = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (pilih) {
+                        case 1:
+                            System.out.println("========ABSENSI MASUK======");
+                            System.out.print("Masukkan Nama: ");
+                            String namaAbsen = scanner.nextLine();
+                            boolean karyawanDitemukan = false;
+                            int j = 0;
+
+                            for (int i = 0; i < jumlahKaryawan; i++) {
+                                if (namaAbsen.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                    karyawanDitemukan = true;
+                                    System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
+                                    String absensi = scanner.nextLine();
+                                
+                                } if (namaAbsen.equalsIgnoreCase("Ya")) {
+                                    absensiKaryawan[j][30] = true; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                    System.out.println("Absensi masuk berhasil dicatat." + (i + 1));
+                                } else if (namaAbsen.equalsIgnoreCase("Tidak")) {
+                                    absensiKaryawan[j][30] = false; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                }
+                            }
+
+                            if (!karyawanDitemukan) {
+                                System.out.println("Karyawan dengan nama " + namaAbsen + " tidak ditemukan.");
+                            }
+                        break;
+                        case 2:
+                            System.out.println("========ABSENSI PULANG======");
+                            System.out.print("Masukkan Nama: ");
+                            String namaabsen = scanner.nextLine();
+                            boolean karyawanditemukan = false;
+                            int J = 0;
+
+                            for (int i = 0; i < jumlahKaryawan; i++) {
+                                if (namaabsen.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                    karyawanDitemukan = true;
+                                    System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
+                                    String absensi = scanner.nextLine();
+                                
+                                } if (namaabsen.equalsIgnoreCase("Ya")) {
+                                    absensiKaryawan[J][30] = true; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                    System.out.println("Absensi pulang berhasil dicatat." + (i + 1));
+                                } else if (namaabsen.equalsIgnoreCase("Tidak")) {
+                                    absensiKaryawan[J][30] = false; // Menggunakan indeks 30 untuk merepresentasikan hadir
+                                                               // pada bulan ini
+                                }
+                            }
+                            
+                            if (!karyawanditemukan) {
+                                System.out.println("Karyawan dengan nama " + namaabsen + " tidak ditemukan.");
+                            }
+                    }
                     break;
                 case 3:
-                    System.out.println("======== Informasi Perusahaan =======");
-                    System.out.print("Masukkan Event Yang Akan Berlangsung: ");
-                    String event = scanner.nextLine();
-                    System.out.print("Masukkan Tanggal Event Berlangsung: ");
-                    String Tanggal = scanner.nextLine();
-
-                    System.out.println(event + "Berlangsung Pada" + Tanggal);
-                    break;
+                    System.out.println("========Izin/Cuti========");
+                    System.out.print("Masukkan Nama Karyawan yang Akan Mengajukan Izin/Cuti: ");
+                    String namaIzinCuti = scanner.nextLine();
+                    scanner.nextLine();
+                    boolean izinCutiDitemukan = false;
+            
+                    for(int i = 0; i < jumlahKaryawan; i++){
+                        if(dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])){
+                            izinCutiDitemukan = true;
+                            System.out.print("Masukkan jumlah hari Izin/Cuti: ");
+                            int jumlahHariIzinCuti = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
+                            break;
+                        }
+                        if (!izinCutiDitemukan) {
+                            System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak ditemukan.");
+                        }
+                        break;
+                    }
+            
                 case 4:
                     System.out.println("Kembali ke Menu Utama");
                     isUserMenuRunning = false;
