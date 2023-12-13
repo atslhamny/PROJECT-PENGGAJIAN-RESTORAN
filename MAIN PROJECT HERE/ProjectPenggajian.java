@@ -168,140 +168,126 @@ public class ProjectPenggajian {
                     System.out.print("Masukkan Nama Karyawan yang Akan Mengajukan Izin/Cuti: ");
                     String namaIzinCuti = scanner.nextLine();
                     boolean izinCutiDitemukan = false;
-
-                    for (int i = 0; i < jumlahKaryawan; i++) {
-                        if (dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])) {
+            
+                    for(int i = 0; i < jumlahKaryawan; i++){
+                        if(dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])){
                             izinCutiDitemukan = true;
                             System.out.print("Masukkan jumlah hari Izin/Cuti: ");
                             int jumlahHariIzinCuti = scanner.nextInt();
                             scanner.nextLine();
-                            int potonganGaji = jumlahHariIzinCuti * 1000;
-
-                            if (jumlahHariIzinCuti <= 0) {
-                                System.out.println("Jumlah Hari Izin/Cuti harus lebih dari 0");
-                            } else {
-                                dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
-                                System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
-                                System.out.println("Potongan gaji sebesar " + potonganGaji + " telah diberlakukan");
-                            }
-                            break;
+                            int potonganGaji = jumlahHariIzinCuti * 5000;
+            
+                            if(jumlahHariIzinCuti <= 0){
+                                System.out.println("Jumlah Hari Iin/Cuti harus lebih dari 0");
+                            }else{
+                            dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
+                            System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
+                            System.out.println("Potongan gaji sebesar " + potonganGaji + " telah diberlakukan");
                         }
+                        break;
                     }
-                    if (!izinCutiDitemukan) {
-                        System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak Ditemukan");
-                    }
-                    break;
+                }
+                if(!izinCutiDitemukan){
+                    System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak Ditemukan");
+                }
                 case 4:
-                    System.out.println("===============Total Penggajian=============");
-                    System.out.print("Masukkan Nama Karyawan yang Akan di Inputkan: ");
-                    String namaKaryawan = scanner.nextLine();
+                    System.out.print("Masukkan Nama Karyawan yang Akan Menginput Jam Kerja: ");
+                    String namaKaryawan = scanner.next();
                     karyawanDitemukan = false;
-                    double bonus = 0.0;
-                    int gajiPokok = 5000;
-
-                    System.out.print("Masukkan Jumlah Jam Kerja: ");
-                    int jamKerja = scanner.nextInt();
-                    int totalGaji = jamKerja * 5000;
-
-                    System.out.println("Total Gaji: " + totalGaji);
-
-                    System.out.print("Masukkan Jumlah Porsi Makanan yang Terjual: ");
-                    int jumlahPorsi = scanner.nextInt();
-
-                    if (jumlahPorsi > 30) {
-                        bonus += 0.10 * totalGaji;
-                    } else if (jumlahPorsi > 20) {
-                        bonus += 0.07 * totalGaji;
-                    } else if (jumlahPorsi > 15) {
-                        bonus += 0.05 * totalGaji;
-                    }
-
-                    System.out.println("Bonus: " + bonus);
-
-                    //if(namaKaryawan.equalsIgnoreCase(dataKaryawan[i][0])){
-                    //karyawanDitemukan = true;
                     for (int i = 0; i < jumlahKaryawan; i++) {
-                        if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null && dataKaryawan[i][2] != null) {
-                            namaKaryawan = dataKaryawan[i][0];
+                        if (namaKaryawan.equalsIgnoreCase(dataKaryawan[i][0])) {
                             karyawanDitemukan = true;
+                            System.out.print("Masukkan jumlah jam kerja: ");
+                            int jamKerja = scanner.nextInt();
+                            int gajiPokok = 5000 * jamKerja;
+                            double bonus = 0;
 
-                            if (dataKaryawan[i][2] != null) {
-                                String[] izinCutiInfo = dataKaryawan[i][2].split(" ");
-                                int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
-                                int potonganGaji = jumlahHariIzinCuti * 5000;
-                                totalGaji -= potonganGaji;
-                                System.out.println("Potongan Gaji Karena Izin.Cuti: " + potonganGaji);
+                            // Hitung bonus jika jam kerja lebih dari 8 jam
+                            if (jamKerja > 8) {
+                                bonus = 0.05 * gajiPokok; // Bonus 5% jika jam kerja lebih dari 8 jam
                             }
 
-                            System.out.println("Masukkan Jumlah Porsi Makanan yang Terjual: ");
-                            jumlahPorsi = scanner.nextInt();
+                            // Hitung bonus penjualan makanan
+                            System.out.print("Masukkan jumlah porsi makanan yang terjual: ");
+                            int jumlahPorsi = scanner.nextInt();
                             if (jumlahPorsi > 30) {
-                                bonus += 0.10 * gajiPokok;
+                                bonus += 0.10 * gajiPokok; // Bonus 10% jika menjual lebih dari 30 porsi
                             } else if (jumlahPorsi > 20) {
-                                bonus += 0.05 * gajiPokok;
+                                bonus += 0.07 * gajiPokok; // Bonus 7% jika menjual lebih dari 20 porsi
                             } else if (jumlahPorsi > 15) {
-                                bonus += 0.05 * gajiPokok;
+                                bonus += 0.05 * gajiPokok; // Bonus 5% jika menjual lebih dari 15 porsi
                             }
-                            System.out.println("Total Gaji sebelum potongan: " + totalGaji);
-                            totalGaji += bonus; //Tambahkan bonus ke totalGaji
-                            System.out.println("Total gaji setelah potongan dan bonus: " + totalGaji);
-                        }
-                    }
 
-                    if (!karyawanDitemukan) {
-                        System.out.println("Karyawan dengan Nama " + namaKaryawan + " tidak ditemukan");
-                    }
-                    break;
-                case 5:
-                    System.out.println("===== Rekapan Laporan =====");
-                    System.out.println("------------------------------------------------");
-                    System.out.println("No\tNama\t\tPosisi\t\tTotal Gaji");
-                    System.out.println("------------------------------------------------");
-
-                    for (int i = 0; i < jumlahKaryawan; i++) {
-                        if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null) {
-                            String nama = dataKaryawan[i][0];
-                            String posisi = dataKaryawan[i][1];
-                            // String absensi = dataKaryawan[i][6];
-                            totalGaji = 0; // Mengubah totalGaji menjadi tipe data int
-
+                            double totalGaji = gajiPokok + bonus;
+                            // Potong gaji berdasarkan izin/cuti
                             if (dataKaryawan[i][2] != null) {
                                 String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
                                 int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
                                 int potonganGaji = jumlahHariIzinCuti * 5000;
                                 totalGaji -= potonganGaji;
+                                System.out.println("Potongan gaji akibat izin/cuti: " + potonganGaji);
                             }
 
-                            // Hitung total gaji dengan bonus dan potongan izin/cuti
-                            if (dataKaryawan[i][3] != null && dataKaryawan[i][4] != null) {
-                                jamKerja = Integer.parseInt(dataKaryawan[i][3]);
-                                jumlahPorsi = Integer.parseInt(dataKaryawan[i][4]);
+                            // Hitung total gaji
+                            dataKaryawan[i][3] = Integer.toString(jamKerja); // Save jam kerja to array
+                            dataKaryawan[i][4] = Integer.toString(jumlahPorsi); // Save jumlah porsi to array
+                            dataKaryawan[i][5] = Double.toString(totalGaji); // Save total gaji to array
+                            System.out.println("Total gaji sebelum potongan: " + totalGaji);
 
-                                gajiPokok = 5000 * jamKerja;
-                                bonus = 0;
-
-                                // Hitung bonus jika jam kerja lebih dari 8 jam
-                                if (jamKerja > 8) {
-                                    bonus = (int)(0.05 * gajiPokok); // Bonus 5% jika jam kerja lebih dari 8 jam
-                                }
-
-                                // Hitung bonus penjualan makanan
-                                if (jumlahPorsi > 30) {
-                                    bonus += (int)(0.10 * gajiPokok); // Bonus 10% jika menjual lebih dari 30 porsi
-                                } else if (jumlahPorsi > 20) {
-                                    bonus += (int)(0.07 * gajiPokok); // Bonus 7% jika menjual lebih dari 20 porsi
-                                } else if (jumlahPorsi > 15) {
-                                    bonus += (int)(0.05 * gajiPokok); // Bonus 5% jika menjual lebih dari 15 porsi
-                                }
-
-                                totalGaji = gajiPokok + (int)bonus;
-                            }
-
-                            System.out.println((i + 1) + "\t" + nama + "\t\t" + posisi + "\t\t" + totalGaji);
+                            // Tampilkan total gaji akhir
+                            System.out.println("Total gaji setelah potongan: " + totalGaji);
+                            break;
                         }
                     }
-                    System.out.println("------------------------------------------------");
-                    break;
+                case 5:
+                    System.out.println("===== Rekapan Laporan =====");
+                    // System.out.println("------------------------------------------------");
+                    // System.out.println("No\tNama\t\tPosisi\t\tTotal Gaji");
+                    // System.out.println("------------------------------------------------");
+
+                    // for (int i = 0; i < jumlahKaryawan; i++) {
+                    //     if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null) {
+                    //         String nama = dataKaryawan[i][0];
+                    //         String posisi = dataKaryawan[i][1];
+                    //         totalGaji = 0; // Mengubah totalGaji menjadi tipe data int
+
+                    //         if (dataKaryawan[i][2] != null) {
+                    //             String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
+                    //             int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                    //             int potonganGaji = jumlahHariIzinCuti * 5000;
+                    //             totalGaji -= potonganGaji;
+                    //         }
+
+                    //         // Hitung total gaji dengan bonus dan potongan izin/cuti
+                    //         if (dataKaryawan[i][3] != null && dataKaryawan[i][4] != null) {
+                    //             jamKerja = Integer.parseInt(dataKaryawan[i][3]);
+                    //             jumlahPorsi = Integer.parseInt(dataKaryawan[i][4]);
+
+                    //             gajiPokok = 5000 * jamKerja;
+                    //             bonus = 0;
+
+                    //             // Hitung bonus jika jam kerja lebih dari 8 jam
+                    //             if (jamKerja > 8) {
+                    //                 bonus = (int)(0.05 * gajiPokok); // Bonus 5% jika jam kerja lebih dari 8 jam
+                    //             }
+
+                    //             // Hitung bonus penjualan makanan
+                    //             if (jumlahPorsi > 30) {
+                    //                 bonus += (int)(0.10 * gajiPokok); // Bonus 10% jika menjual lebih dari 30 porsi
+                    //             } else if (jumlahPorsi > 20) {
+                    //                 bonus += (int)(0.07 * gajiPokok); // Bonus 7% jika menjual lebih dari 20 porsi
+                    //             } else if (jumlahPorsi > 15) {
+                    //                 bonus += (int)(0.05 * gajiPokok); // Bonus 5% jika menjual lebih dari 15 porsi
+                    //             }
+
+                    //             totalGaji = gajiPokok + (int)bonus;
+                    //         }
+
+                    //         System.out.println((i + 1) + "\t" + nama + "\t\t" + posisi + "\t\t" + totalGaji);
+                    //     }
+                    // }
+                    // System.out.println("------------------------------------------------");
+                    // break;
                 case 6:
                 System.out.println("Kembali ke Menu Utama");
                 isAdminMenu = false;
