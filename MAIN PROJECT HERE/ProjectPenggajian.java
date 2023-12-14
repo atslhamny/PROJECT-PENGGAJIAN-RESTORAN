@@ -114,7 +114,7 @@ public class ProjectPenggajian {
                             System.out.println("------------------------------------------------------");
                             System.out.println("---------------------Data Karyawan--------------------");
                             System.out.println("------------------------------------------------------");
-                            System.out.println("No\tNama\t\tPosisi\tNomor Rekening");
+                            System.out.println("No\tNama\t\tPosisi\t\tNomor Rekening");
                             for (int j = 0; j < jumlahKaryawan; j++) {
                                 if (dataKaryawan[j][0] != null) {
                                     System.out.println((j + 1) + "\t" + dataKaryawan[j][0] + "\t\t" + dataKaryawan[j][1] + "\t\t" + dataKaryawan[j][2]);
@@ -168,28 +168,30 @@ public class ProjectPenggajian {
                     System.out.print("Masukkan Nama Karyawan yang Akan Mengajukan Izin/Cuti: ");
                     String namaIzinCuti = scanner.nextLine();
                     boolean izinCutiDitemukan = false;
-            
-                    for(int i = 0; i < jumlahKaryawan; i++){
-                        if(dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])){
+
+                    for (int i = 0; i < jumlahKaryawan; i++) {
+                        if (dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])) {
                             izinCutiDitemukan = true;
                             System.out.print("Masukkan jumlah hari Izin/Cuti: ");
                             int jumlahHariIzinCuti = scanner.nextInt();
                             scanner.nextLine();
                             int potonganGaji = jumlahHariIzinCuti * 5000;
-            
-                            if(jumlahHariIzinCuti <= 0){
+
+                            if (jumlahHariIzinCuti <= 0) {
                                 System.out.println("Jumlah Hari Iin/Cuti harus lebih dari 0");
-                            }else{
-                            dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
-                            System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
-                            System.out.println("Potongan gaji sebesar " + potonganGaji + " telah diberlakukan");
+                            } else {
+                                dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
+                                System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
+                                System.out.println("Potongan gaji sebesar " + potonganGaji + " telah diberlakukan");
+                            }
+                            break;
                         }
-                        break;
                     }
-                }
-                if(!izinCutiDitemukan){
-                    System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak Ditemukan");
-                }
+                    if (!izinCutiDitemukan) {
+                        System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak Ditemukan");
+                    }
+                    break;
+
                 case 4:
                     System.out.print("Masukkan Nama Karyawan yang Akan Menginput Jam Kerja: ");
                     String namaKaryawan = scanner.next();
@@ -232,273 +234,303 @@ public class ProjectPenggajian {
                             dataKaryawan[i][3] = Integer.toString(jamKerja); // Save jam kerja to array
                             dataKaryawan[i][4] = Integer.toString(jumlahPorsi); // Save jumlah porsi to array
                             dataKaryawan[i][5] = Double.toString(totalGaji); // Save total gaji to array
-                            System.out.println("Total gaji sebelum potongan: " + totalGaji);
-
-                            // Tampilkan total gaji akhir
-                            System.out.println("Total gaji setelah potongan: " + totalGaji);
+                            System.out.println("Total Gaji: " + totalGaji);
                             break;
                         }
                     }
+                    break;
                 case 5:
                     System.out.println("===== Rekapan Laporan =====");
-                    // System.out.println("------------------------------------------------");
-                    // System.out.println("No\tNama\t\tPosisi\t\tTotal Gaji");
-                    // System.out.println("------------------------------------------------");
-
-                    // for (int i = 0; i < jumlahKaryawan; i++) {
-                    //     if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null) {
-                    //         String nama = dataKaryawan[i][0];
-                    //         String posisi = dataKaryawan[i][1];
-                    //         totalGaji = 0; // Mengubah totalGaji menjadi tipe data int
-
-                    //         if (dataKaryawan[i][2] != null) {
-                    //             String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
-                    //             int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
-                    //             int potonganGaji = jumlahHariIzinCuti * 5000;
-                    //             totalGaji -= potonganGaji;
-                    //         }
-
-                    //         // Hitung total gaji dengan bonus dan potongan izin/cuti
-                    //         if (dataKaryawan[i][3] != null && dataKaryawan[i][4] != null) {
-                    //             jamKerja = Integer.parseInt(dataKaryawan[i][3]);
-                    //             jumlahPorsi = Integer.parseInt(dataKaryawan[i][4]);
-
-                    //             gajiPokok = 5000 * jamKerja;
-                    //             bonus = 0;
-
-                    //             // Hitung bonus jika jam kerja lebih dari 8 jam
-                    //             if (jamKerja > 8) {
-                    //                 bonus = (int)(0.05 * gajiPokok); // Bonus 5% jika jam kerja lebih dari 8 jam
-                    //             }
-
-                    //             // Hitung bonus penjualan makanan
-                    //             if (jumlahPorsi > 30) {
-                    //                 bonus += (int)(0.10 * gajiPokok); // Bonus 10% jika menjual lebih dari 30 porsi
-                    //             } else if (jumlahPorsi > 20) {
-                    //                 bonus += (int)(0.07 * gajiPokok); // Bonus 7% jika menjual lebih dari 20 porsi
-                    //             } else if (jumlahPorsi > 15) {
-                    //                 bonus += (int)(0.05 * gajiPokok); // Bonus 5% jika menjual lebih dari 15 porsi
-                    //             }
-
-                    //             totalGaji = gajiPokok + (int)bonus;
-                    //         }
-
-                    //         System.out.println((i + 1) + "\t" + nama + "\t\t" + posisi + "\t\t" + totalGaji);
-                    //     }
-                    // }
-                    // System.out.println("------------------------------------------------");
-                    // break;
-                case 6:
-                System.out.println("Kembali ke Menu Utama");
-                isAdminMenu = false;
-                break;
-                default:
-                System.out.println("Pilihan tidak valid.");
-            }
-    }
-}
-
-// Fungsi untuk menampilkan menu user
-public static void userMenu(Scanner scanner) {
-    boolean isUserMenuRunning = true;
-
-    while (isUserMenuRunning) {
-        System.out.println("Menu User:");
-        System.out.println("1. Input Data");
-        System.out.println("2. Absensi");
-        System.out.println("3. Izin/Cuti");
-        System.out.println("4. Slip Gaji");
-        System.out.println("5. Informasi Perusahaan");
-
-        System.out.print("Pilih menu (1-4): ");
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                System.out.println("================Input Data===============");
-                for (int i = 0; i < jumlahKaryawan; i++) {
-                    System.out.println("\nData Karyawan ke-" + (i + 1));
-                    System.out.print("Masukkan Nama: ");
-                    scanner.nextLine();
-                    dataKaryawan[i][0] = scanner.nextLine();
-                    System.out.print("Masukkan Posisi: ");
-                    dataKaryawan[i][1] = scanner.nextLine();
-
-                    System.out.println("Apakah anda ingin menambahkan data karyawan lagi? Ya/Tidak");
-                    skip = scanner.nextLine();
-                    if (!skip.equalsIgnoreCase("Ya")) {
-                        break;
-                    }
-                }
-                break;
-            case 2:
-                System.out.println("=============ABSENSI============");
-                System.out.println("1. Absensi Masuk");
-                System.out.println("2. Absensi Pulang");
-
-                System.out.print("Pilih: ");
-                int pilih = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (pilih) {
-                    case 1:
-                        System.out.println("========ABSENSI MASUK======");
-                        System.out.print("Masukkan Nama: ");
-                        String namaAbsen = scanner.nextLine();
-                        boolean karyawanDitemukan = false;
-                        int j = 0;
-
-                        for (int i = 0; i < jumlahKaryawan; i++) {
-                            if (namaAbsen.equalsIgnoreCase(dataKaryawan[i][0])) {
-                                karyawanDitemukan = true;
-                                System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
-                                String absensi = scanner.nextLine();
-
-                            }
-                            if (namaAbsen.equalsIgnoreCase("Ya")) {
-                                absensiKaryawan[j][30] = true; // Menggunakan indeks 30 untuk merepresentasikan hadir
-                                // pada bulan ini
-                                System.out.println("Absensi masuk berhasil dicatat." + (i + 1));
-                            } else if (namaAbsen.equalsIgnoreCase("Tidak")) {
-                                absensiKaryawan[j][30] = false; // Menggunakan indeks 30 untuk merepresentasikan hadir
-                                // pada bulan ini
-                            }
-                        }
-
-                        if (!karyawanDitemukan) {
-                            System.out.println("Karyawan dengan nama " + namaAbsen + " tidak ditemukan.");
-                        }
-                        break;
-                    case 2:
-                        System.out.println("========ABSENSI PULANG======");
-                        System.out.print("Masukkan Nama: ");
-                        String namaabsen = scanner.nextLine();
-                        boolean karyawanditemukan = false;
-                        int J = 0;
-
-                        for (int i = 0; i < jumlahKaryawan; i++) {
-                            if (namaabsen.equalsIgnoreCase(dataKaryawan[i][0])) {
-                                karyawanDitemukan = true;
-                                System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
-                                String absensi = scanner.nextLine();
-
-                            }
-                            if (namaabsen.equalsIgnoreCase("Ya")) {
-                                absensiKaryawan[J][30] = true; // Menggunakan indeks 30 untuk merepresentasikan hadir
-                                // pada bulan ini
-                                System.out.println("Absensi pulang berhasil dicatat." + (i + 1));
-                            } else if (namaabsen.equalsIgnoreCase("Tidak")) {
-                                absensiKaryawan[J][30] = false; // Menggunakan indeks 30 untuk merepresentasikan hadir
-                                // pada bulan ini
-                            }
-                        }
-
-                        if (!karyawanditemukan) {
-                            System.out.println("Karyawan dengan nama " + namaabsen + " tidak ditemukan.");
-                        }
-                }
-                break;
-            case 3:
-                System.out.println("========Izin/Cuti========");
-                System.out.print("Masukkan Nama Karyawan yang Akan Mengajukan Izin/Cuti: ");
-                String namaIzinCuti = scanner.nextLine();
-                scanner.nextLine();
-                boolean izinCutiDitemukan = false;
-
-                for (int i = 0; i < jumlahKaryawan;) {
-                    if (dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])) {
-                        izinCutiDitemukan = true;
-                        System.out.print("Masukkan jumlah hari Izin/Cuti: ");
-                        int jumlahHariIzinCuti = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
-                        break;
-                    }
-                    if (!izinCutiDitemukan) {
-                        System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak ditemukan.");
-                    }
-                    break;
-                }
-                case 4:
-                    System.out.println("Anda memilih Slip Gaji");
-                    System.out.print("Masukkan Tanggal Permintaan Slip Gaji (format: DD/MM/YYYY): ");
-                    String tanggal = scanner.next(); // Menggunakan next() untuk membaca input tanggal
-
-                    System.out.print("Masukkan Nama Karyawan yang meminta Slip Gaji: ");
-                    String nama_karyawan = scanner.next();
-
-                    System.out.print("Masukkan Jabatan: ");
-                    String jabatan = scanner.next();
-
-                    System.out.print("Masukkan Nomor Karyawan: ");
-                    String noHp = scanner.next();
-
-                    System.out.println("-------------------------------------------------");
-                    System.out.println(" \t       SLIP GAJI KARYAWAN");
-                    System.out.println("-------------------------------------------------");
-                    // Lanjut mencetak informasi slip gaji seperti gaji, tunjangan, dll.
-
-                    // Output:
-                    System.out.println("\t\t\t    Tanggal : " + tanggal);
-                    System.out.println("Nama Karyawan: " + nama_karyawan);
-                    System.out.println("Jabatan: " + jabatan);
-                    System.out.println("No. Telp: " + noHp);
-
-                    int gajiPokok = 5000; // Gaji pokok per jam
-                    int jamKerja = 8; // Karyawan bekerja 8 jam per hari
-                    double totalGaji = gajiPokok * jamKerja;
-
-                    double tunjangan = 1000; // Misal, tunjangan tetap per bulan
-                    double bonusTarget = 2000; // Misal, bonus target per bulan
-                    double lemburRate = 1.5; // Rate lembur per jam
-                    double lembur = (jamKerja > 8) ? (jamKerja - 8) * lemburRate : 0; // Hanya lembur jika jam kerja > 8 jam
-
-                    totalGaji += tunjangan + bonusTarget + lembur;
-
-                    System.out.println("\t\t   PENGHASILAN");
-                    System.out.println("Gaji Pokok\t\t\t\t" + gajiPokok * jamKerja);
-                    System.out.println("Tunjangant\t\t\t\t" + tunjangan);
-                    System.out.println("Bonus Target\t\t\t\t" + bonusTarget);
-                    System.out.println("Lembur\t\t\t\t\t" + lembur);
-
-                    int potonganGaji = 0;
-
+                    System.out.println("------------------------------------------------");
+                    System.out.println("No\tNama\t\tPosisi\t\tTotal Gaji");
+                    System.out.println("------------------------------------------------");
                     for (int i = 0; i < jumlahKaryawan; i++) {
-                        if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null && dataKaryawan[i][2] != null) {
-                            nama_karyawan = dataKaryawan[i][0];
-                            jabatan = dataKaryawan[i][1];
+                        if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null) {
+                            String nama = dataKaryawan[i][0];
+                            String posisi = dataKaryawan[i][1];
+                            // String absensi = dataKaryawan[i][6];
+                            double totalGaji = 0;
+                            if (dataKaryawan[i][2] != null) {
+                                String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
+                                int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                                int potonganGaji = jumlahHariIzinCuti * 5000;
+                                totalGaji -= potonganGaji;
+                            }
+                            // Hitung total gaji dengan bonus dan potongan izin/cuti
+                            if (dataKaryawan[i][3] != null && dataKaryawan[i][4] != null) {
+                                int jamKerja = Integer.parseInt(dataKaryawan[i][3]);
+                                int jumlahPorsi = Integer.parseInt(dataKaryawan[i][4]);
 
-                            // Hitung potongan gaji berdasarkan izin/cuti
-                            String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
-                            int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
-                            potonganGaji = jumlahHariIzinCuti * 5000;
-                            totalGaji -= potonganGaji;
-                            break; // Hanya perlu satu kali potongan izin/cuti, jadi keluar dari loop setelah menemukannya
+                                int gajiPokok = 5000 * jamKerja;
+                                double bonus = 0;
+                                // Hitung bonus jika jam kerja lebih dari 8 jam
+                                if (jamKerja > 8) {
+                                    bonus = 0.05 * gajiPokok; // Bonus 5% jika jam kerja lebih dari 8 jam
+                                }
+                                // Hitung bonus penjualan makanan
+                                if (jumlahPorsi > 30) {
+                                    bonus += 0.10 * gajiPokok; // Bonus 10% jika menjual lebih dari 30 porsi
+                                } else if (jumlahPorsi > 20) {
+                                    bonus += 0.07 * gajiPokok; // Bonus 7% jika menjual lebih dari 20 porsi
+                                } else if (jumlahPorsi > 15) {
+                                    bonus += 0.05 * gajiPokok; // Bonus 5% jika menjual lebih dari 15 porsi
+                                }
+                                totalGaji = gajiPokok + bonus;
+
+                                if (dataKaryawan[i][2] != null) {
+                                    String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
+                                    int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                                    int potonganGaji = jumlahHariIzinCuti * 5000;
+                                    totalGaji -= potonganGaji;
+                                    //System.out.println("Potongan gaji akibat izin/cuti: " + potonganGaji);
+                                }
+                            }
+                            System.out.println((i + 1) + "\t" + nama + "\t\t" + posisi + "\t" + totalGaji);
                         }
                     }
-
-                    System.out.println("\t\t    POTONGAN");
-                    System.out.println("Izin/Cuti\t\t\t\t" + potonganGaji);
-
-                    System.out.println("Total Gaji Setelah Potongan\t\t" + totalGaji);
-                    break;
-
-                case 5:
-                    System.out.println("======== Informasi Perusahaan =======");
-                    System.out.print("Masukkan Event Yang Akan Berlangsung: ");
-                    String event = scanner.nextLine();
-                    System.out.print("Masukkan Tanggal Event Berlangsung: ");
-                    String Tanggal = scanner.nextLine();
-
-                    System.out.println(event + "Berlangsung Pada" + Tanggal);
+                    System.out.println("------------------------------------------------");
                     break;
                 case 6:
                     System.out.println("Kembali ke Menu Utama");
-                    isUserMenuRunning = false;
+                    //isAdminMenu = false;
+                    if (isAdminMenu = false) {
+                        login(null, null, null, scanner);
+                    }
                     break;
                 default:
-                    System.out.println("Pilihan tidak valid. Silakan pilih 1-4.");
+                    System.out.println("Pilihan tidak valid.");
+            }
         }
     }
-}
+
+    // Fungsi untuk menampilkan menu user
+    public static void userMenu(Scanner scanner) {
+        boolean isUserMenuRunning = true;
+
+        while (isUserMenuRunning) {
+            System.out.println("Menu User:");
+            System.out.println("1. Input Data User");
+            System.out.println("2. Absensi");
+            System.out.println("3. Izin/Cuti");
+            System.out.println("4. Slip Gaji");
+            System.out.println("5. Informasi Perusahaan");
+            System.out.println("6. Keluar");
+
+            System.out.print("Pilih menu (1-5): ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("================Input Data===============");
+                    String skip;
+                    scanner.nextLine();
+
+                    for (int i = 0; i < jumlahKaryawan; i++) {
+                        System.out.println("\nData Karyawan ke-" + (i + 1));
+
+                        // input nama
+                        System.out.print("Masukkan Nama: ");
+                        dataKaryawan[i][0] = scanner.nextLine();
+
+                        // input posisi
+                        System.out.print("Masukkan Posisi: ");
+                        dataKaryawan[i][1] = scanner.nextLine();
+
+                        System.out.println("Apakah anda ingin menambahkan data karyawan lagi? Ya/Tidak");
+                        skip = scanner.nextLine();
+
+                        if (!skip.equalsIgnoreCase("Ya")) {
+                            break;
+                        }
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("=============ABSENSI============");
+                    System.out.println("1. Absensi Masuk");
+                    System.out.println("2. Absensi Pulang");
+
+                    System.out.print("Pilih: ");
+                    int absensiUser = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (absensiUser) {
+                        case 1:
+                            System.out.println("=========== ABSENSI MASUK ==========");
+                            System.out.print("Masukkan Nama: ");
+                            String namaAbsen = scanner.nextLine();
+                            boolean karyawanDitemukan = false;
+
+                            for (int i = 0; i < jumlahKaryawan; i++) {
+                                if (namaAbsen.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                    karyawanDitemukan = true;
+                                    break;
+                                }
+                            }
+                            if (karyawanDitemukan) {
+                                System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
+                                String absensi = scanner.nextLine();
+                                int i = 0;
+                                if (absensi.equalsIgnoreCase("Ya")) {
+                                    absensiKaryawan[i][30] = true; // Menggunakan indeks 30 untuk merepresentasikan
+                                                                   // hadir
+                                    // pada bulan ini
+                                    System.out.println("Absensi masuk berhasil dicatat.");
+                                } else if (absensi.equalsIgnoreCase("Tidak")) {
+                                    absensiKaryawan[i][30] = false; // Menggunakan indeks 30 untuk merepresentasikan
+                                                                    // hadir
+                                    // pada bulan ini
+                                }
+                            } else {
+                                System.out.println("Karyawan tidak ditemukan.");
+                            }
+                            break;
+                        case 2:
+                        System.out.println("=========== ABSENSI PULANG ==========");
+                            System.out.print("Masukkan Nama: ");
+                            namaAbsen = scanner.nextLine();
+                            karyawanDitemukan = false;
+
+                            for (int i = 0; i < jumlahKaryawan; i++) {
+                                if (namaAbsen.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                    karyawanDitemukan = true;
+                                    break;
+                                }
+                            }
+                            if (karyawanDitemukan) {
+                                System.out.println("Apakah anda ingin melakukan absen? Ya/Tidak: ");
+                                String absensi = scanner.nextLine();
+                                int i = 0;
+                                if (absensi.equalsIgnoreCase("Ya")) {
+                                    absensiKaryawan[i][30] = true; // Menggunakan indeks 30 untuk merepresentasikan
+                                                                   // hadir
+                                    // pada bulan ini
+                                    System.out.println("Absensi masuk berhasil dicatat.");
+                                } else if (absensi.equalsIgnoreCase("Tidak")) {
+                                    absensiKaryawan[i][30] = false; // Menggunakan indeks 30 untuk merepresentasikan
+                                                                    // hadir
+                                    // pada bulan ini
+                                }
+                            } else {
+                                System.out.println("Karyawan tidak ditemukan.");
+                            }
+                            break;
+                    }
+                    break;
+
+                    case 3:
+                        System.out.println("========Izin/Cuti=======");
+                        System.out.print("Masukkan Nama Karyawan yang Akan Mengajukan Izin/Cuti: ");
+                        scanner.nextLine();
+                        String namaIzinCuti = scanner.nextLine();
+                        boolean izinCutiDitemukan = false;
+
+                        for (int i = 0; i < jumlahKaryawan; i++) {
+                            if (dataKaryawan[i][0] != null && namaIzinCuti.equalsIgnoreCase(dataKaryawan[i][0])) {
+                                izinCutiDitemukan = true;
+                                System.out.print("Masukkan jumlah hari Izin/Cuti: ");
+                                int jumlahHariIzinCuti = scanner.nextInt();
+                                scanner.nextLine();
+                                int potonganGaji = jumlahHariIzinCuti * 5000;
+
+                                if (jumlahHariIzinCuti <= 0) {
+                                    System.out.println("Jumlah Hari Iin/Cuti harus lebih dari 0");
+                                } else {
+                                    dataKaryawan[i][2] = "Izin/Cuti: " + jumlahHariIzinCuti + " hari";
+                                    System.out.println("Izin/Cuti sebanyak " + jumlahHariIzinCuti + " hari telah diajukan");
+                                    System.out.println("Potongan gaji sebesar " + potonganGaji + " telah diberlakukan");
+                                }
+                                break;
+                            }
+                        }
+                        if (!izinCutiDitemukan) {
+                            System.out.println("Karyawan dengan nama " + namaIzinCuti + " tidak Ditemukan");
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("Anda memilih Slip Gaji");
+                        System.out.print("Masukkan Tanggal Permintaan Slip Gaji (format: DD/MM/YYYY): ");
+                        String tanggal = scanner.next(); // Menggunakan next() untuk membaca input tanggal
+
+                        System.out.print("Masukkan Nama Karyawan yang meminta Slip Gaji: ");
+                        String nama_karyawan = scanner.next();
+
+                        System.out.print("Masukkan Jabatan: ");
+                        String jabatan = scanner.next();
+
+                        System.out.print("Masukkan Nomor Karyawan: ");
+                        String noHp = scanner.next();
+
+                        System.out.println("-------------------------------------------------");
+                        System.out.println(" \t       SLIP GAJI KARYAWAN");
+                        System.out.println("-------------------------------------------------");
+                        // Lanjut mencetak informasi slip gaji seperti gaji, tunjangan, dll.
+
+                        // Output:
+                        System.out.println("\t\t\t    Tanggal : " + tanggal);
+                        System.out.println("Nama Karyawan: " + nama_karyawan);
+                        System.out.println("Jabatan: " + jabatan);
+                        System.out.println("No. Telp: " + noHp);
+
+                        int gajiPokok = 5000; // Gaji pokok per jam
+                        int jamKerja = 8; // Karyawan bekerja 8 jam per hari
+                        double totalGaji = gajiPokok * jamKerja;
+
+                        double tunjangan = 1000; // Misal, tunjangan tetap per bulan
+                        double bonusTarget = 2000; // Misal, bonus target per bulan
+                        double lemburRate = 1.5; // Rate lembur per jam
+                        double lembur = (jamKerja > 8) ? (jamKerja - 8) * lemburRate : 0; // Hanya lembur jika jam kerja > 8 jam
+
+                        totalGaji += tunjangan + bonusTarget + lembur;
+
+                        System.out.println("\t\t   PENGHASILAN");
+                        System.out.println("Gaji Pokok\t\t\t\t" + gajiPokok * jamKerja);
+                        System.out.println("Tunjangan\t\t\t\t" + tunjangan);
+                        System.out.println("Bonus Target\t\t\t\t" + bonusTarget);
+                        System.out.println("Lembur\t\t\t\t\t" + lembur);
+
+                        int potonganGaji = 0;
+
+                        for (int i = 0; i < jumlahKaryawan; i++) {
+                            if (dataKaryawan[i][0] != null && dataKaryawan[i][1] != null && dataKaryawan[i][2] != null) {
+                                nama_karyawan = dataKaryawan[i][0];
+                                jabatan = dataKaryawan[i][1];
+
+                                // Hitung potongan gaji berdasarkan izin/cuti
+                                String[] izinCutiInfo = dataKaryawan[i][2].split(": ");
+                                int jumlahHariIzinCuti = Integer.parseInt(izinCutiInfo[1].split(" ")[0]);
+                                potonganGaji = jumlahHariIzinCuti * 5000;
+                                totalGaji -= potonganGaji;
+                                break; // Hanya perlu satu kali potongan izin/cuti, jadi keluar dari loop setelah menemukannya
+                            }
+                        }
+
+                        System.out.println("\t\t    POTONGAN");
+                        System.out.println("Izin/Cuti\t\t\t\t" + potonganGaji);
+
+                        System.out.println("Total Gaji Setelah Potongan\t\t" + totalGaji);
+                        System.out.println("-------------------------------------------------");
+                        break;
+
+
+                    case 5:
+                        System.out.println("======== Informasi Perusahaan =======");
+                        System.out.print("Masukkan Event Yang Akan Berlangsung: ");
+                        String event = scanner.nextLine();
+                        System.out.print("Masukkan Tanggal Event Berlangsung: ");
+                        String Tanggal = scanner.nextLine();
+
+                        System.out.println(event + "Berlangsung Pada" + Tanggal);
+                        break;
+                    case 6:
+                        System.out.println("Kembali ke Menu Utama");
+                        isUserMenuRunning = false;
+                        login(null, null, null, scanner);
+                        break;
+                    default:
+                        System.out.println("Pilihan tidak valid. Silakan pilih 1-4.");
+            }
+        }
+    }
 }
